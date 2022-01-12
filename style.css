@@ -3,7 +3,6 @@
 /**/
 
 html{
-    overflow: hidden;
 }
 
 body{
@@ -11,10 +10,10 @@ body{
     height: 100vh;
     display: flex;
     flex-direction: column;
-    flex: 0;
 }
 
 .header{
+    transition: background-color 2s;
     height: 20%;
     display: flex;
     align-items: center;
@@ -48,7 +47,16 @@ ul a{
     padding: 2px 5px;
     border-radius: 10px;
 }
-
+.theme{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(255, 255, 255);
+    transition: all 2s;
+}
+.theme i{
+    font-size: 40px;
+}
 
 
 
@@ -58,7 +66,6 @@ ul a{
     justify-content: space-between;
     height: 100%;
     background-color: black;
-
 }
 .left-buttons{
     width: 25%;
@@ -68,7 +75,7 @@ ul a{
     justify-content: center;
     align-items: center;
     gap: 20px;
-    
+    transition: background-color 2s;
 }
 .content button,.slider{
    font-family: 'Amatic SC';
@@ -77,13 +84,15 @@ ul a{
    font-size: 30px;
    height: auto;
    background-color: black;
-   border: none;
    color: rgb(188, 255, 2);
+   border: 2px solid black;
+   transition: all 0.8s;
 }
 .sketch-area{
     display: flex;
     flex: 1;
     flex-shrink: 0;
+    transition: background-color 2s;
 }
 .grid-container{
     display: grid;
@@ -110,9 +119,9 @@ ul a{
     flex: 1;
     justify-content: center;
     align-items: center;
+    transition: color 2s;
 }
 .text{
-    color: red;
     font-family: 'Amatic Sc';
     font-size: 70px;
     font-weight: 700;
@@ -123,16 +132,16 @@ ul a{
 
 
 
-  .footer{
-      height: 20%;
+.footer{
+      height: 10%;
       padding: 10px;
       font-size: 32px;
       font-weight: 700;
-      flex: 0;
       font-family: 'Amatic Sc';
       display: flex;
       justify-content: center;
       border-top: 1px solid black;
       background-color: rgb(255, 255, 255);
       color: rgb(63, 63, 63);
-  }
+      transition: all 2s;
+}
