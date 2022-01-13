@@ -132,7 +132,8 @@ btn.forEach(btn => {
 })
 
 colorBtn.addEventListener('click', ()=>{
-  colorShadow.style.boxShadow="0 0 5px " +color
+  colorShadow.style.boxShadow="0 0 8px " +color
+  setTimeout(function (){ ogShadow(color); }, 1500)
 })
 
 function ogShadow(color){
@@ -147,10 +148,12 @@ clear.addEventListener("click", ()=>{
 }) 
 
 text.addEventListener('mouseover', ()=>{
+  text.style.transition="all 1.4s"
   text.style.color="rgb(0, 255, 0)"
   text_mode="changed"
 })
 text.addEventListener('mouseout', ()=>{
+  text.style.transition="all 1.4s"
   text.style.color="red"
   text_mode="changed"
 })
@@ -158,6 +161,7 @@ text.addEventListener('mouseout', ()=>{
 
 /*//////////Dark/Light Mode SWItCHER + HOVER/CLICK SWITCHER////////////*/
 themeSwitcher.addEventListener('click', ()=>{
+  text.style.transition="all 2s"
   if(mode=="light_mode"){
       themeSwitcher.textContent="light_mode"
       themeSwitcher.style.color="white"

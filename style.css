@@ -131,7 +131,7 @@ ul a{
     flex: 1;
     justify-content: center;
     align-items: center;
-    transition: color 2s;
+    transition: color 1.4s;
 }
 .text{
     font-family: 'Amatic Sc';
