@@ -1,3 +1,10 @@
+/**/
+/*Do Not Open this file for copying the script! Remember this won't do*\
+//you any good and you won't learn to code like a real developer!
+//Always search on google for anything you don't understand.
+//This script can be good for you to use as a refernce AFTER you have completed your website
+
+/**/
 /*Header*/
 @import url('https://fonts.googleapis.com/css2?family=Amatic+SC&display=swap');
 /**/
@@ -75,7 +82,7 @@ ul a{
     justify-content: center;
     align-items: center;
     gap: 20px;
-    transition: background-color 2s;
+    transition: all 2s;
 }
 .content button,.slider{
    font-family: 'Amatic SC';
@@ -127,7 +134,12 @@ ul a{
     font-weight: 700;
 }
 
-
+.grid-item{
+    transition: all 0.4s;
+}
+.grid-container{
+    transition: all 2s;
+}
 
 
 
