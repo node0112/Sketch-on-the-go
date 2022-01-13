@@ -17,7 +17,8 @@ const footer=document.querySelector('.footer')
 const header=document.querySelector('.header')
 let items = document.querySelectorAll('.grid-item');
 let param=document.querySelector('.param')
-let borderMode=document.querySelector('.border')
+let borderBtn=document.querySelector('.border')
+let borderMode="bordered"
 let mode="dark_mode"
 let rows=16
 let columns=16
@@ -35,18 +36,31 @@ function gridSelector(){ //takes input from user. Default grid is 16x16
 
 
 ////////////////GRID MAKER\\\\\\\\\\\\\\\\\\\\
-makeGrid(rows,columns)//defualt grid
+makeGrid(rows,columns,borderMode)//defualt grid
 function makeGrid(rows,columns){
     grids.style.setProperty('--grid-rows',rows)
     grids.style.setProperty('--grid-columns',columns)
     for (let i = 0; i < (rows * columns); i++) {
+      let items = document.querySelectorAll('.grid-item');
         let cell = document.createElement("div");
-        cell.classList.add('grid-item');
+        
+        if(borderMode=="borderless"){
+          items.forEach(item => {
+            item.style.border = "";
+          })
+        }
+        else if(borderMode=="bordered"){
+          items.forEach(item => {
+            item.style.border = "1px solid black";
+        })}
+
+      cell.classList.add('grid-item');
       grids.appendChild(cell);
       };
       hoverColor(color,parameter);
-}
-//*///////////////CLEAR\\\\\\\\\\\\\\\\\\\*/
+    }
+
+//*///////////////CLEAR GRID\\\\\\\\\\\\\\\\\\\*/
 function clearGrid(rows,columns,parameter,color){
   if(paramState==0){
   let items = document.querySelectorAll('.grid-item');
@@ -74,6 +88,22 @@ function hoverColor(color,parameter) {
 }
 /******************************* */
 
+////////////////////BORDERED OR BORDERLESS\\\\\\\\\\\\\\\\\\\
+function borderChange(borderMode){
+  let items = document.querySelectorAll('.grid-item');
+  if(borderMode=="bordered"){
+   while(grids.firstChild) {
+    grids.removeChild(grids.lastChild)
+  }return(makeGrid(rows,columns,borderMode))
+  }
+
+  else if(borderMode=="borderless"){
+    while(grids.firstChild) {
+      grids.removeChild(grids.lastChild)
+    }return(makeGrid(rows,columns,borderMode))
+  }
+
+}
 
 /*////////////////////\\\\\\\\\\\\\\\\\\\\\* /
 /*Basic animations for buttons and alot of the things you see!*/
@@ -148,6 +178,20 @@ param.addEventListener('click', ()=>{
     parameter='mouseover';
     param.textContent="Click Fill"
     return(clearGrid(rows,columns,color,parameter))
+  }
+})
+
+//border or borderless
+borderBtn.addEventListener('click',()=>{
+  if(borderMode=="bordered"){
+    borderMode="borderless"
+    borderBtn.textContent="Bordered"
+    borderChange(borderMode)
+  }
+  else if(borderMode=="borderless"){
+    borderMode="bordered"
+    borderBtn.textContent="Border Less"
+    borderChange(borderMode)
   }
 })
 
