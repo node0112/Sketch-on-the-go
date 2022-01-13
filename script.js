@@ -7,9 +7,10 @@ const leftside=document.querySelector('.left-buttons')
 const sktchArea=document.querySelector('.sketch-area')
 const footer=document.querySelector('.footer')
 const header=document.querySelector('.header')
+let items = document.querySelectorAll('.grid-item');
 let mode="dark_mode"
-let rows=0
-let columns=0
+let rows=16
+let columns=16
 let text_mode="og"
 
 function gridSelector(){
@@ -23,13 +24,25 @@ function makeGrid(rows,columns){
     grids.style.setProperty('--grid-columns',columns)
     for (let i = 0; i < (rows * columns); i++) {
         let cell = document.createElement("div");
-        grids.appendChild(cell).className = "grid-item";
+        cell.classList.add('grid-item');
+      grids.appendChild(cell);
       };
+      hoverColor();
 }
 makeGrid(16,16)
 
+function clearGrid(rows,columns){
+    grids.style.backgroundColor="whitesmoke"
+    while(grids.firstChild) {
+        grids.removeChild(grids.lastChild)
+      }
+      return(makeGrid(rows,columns))
+}
 
-clear.addEventListener("click", gridSelector) 
+
+clear.addEventListener("click", ()=>{
+  clearGrid(16,16)
+}) 
 
 text.addEventListener('mouseover', ()=>{
   text.style.color="rgb(0, 255, 0)"
@@ -64,9 +77,8 @@ themeSwitcher.addEventListener('click', ()=>{
     text.style.color="white"}
   }
 })
-
-
 /*////////////////////////*/ 
+
 btn.forEach(btn => {
   btn.addEventListener('mouseover', ()=>{
     btn.style.backgroundColor="green"
@@ -84,14 +96,13 @@ btn.forEach(btn => {
   btn.style.fontWeight="300"
 })
 })
-
-
-
-function clearGrid(rows,columns){
-  console.log("hi")
-  for (let i = 0; i < (rows * columns); i++) {
-    let cell = document.createElement("div");
-    cell.style.backgroundColor="red"
-    grids.appendChild(cell).className = "grid-item";
-  };
+/*///////////////////////*/
+/*grid*/
+function hoverColor() {
+  let items = document.querySelectorAll('.grid-item');
+  items.forEach(item => {
+    item.addEventListener('mouseover', () => {
+      item.style.backgroundColor = `red`;
+    });
+  });
 }
