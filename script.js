@@ -8,6 +8,7 @@
 
 const grids=document.querySelector('.grid-container')
 const clear=document.querySelector('.clear')
+const colorBtn=document.querySelector('.color')
 const text=document.querySelector('.text-info')
 const btn=document.querySelectorAll('.left-buttons button')
 const themeSwitcher=document.querySelector('.theme i')
@@ -15,6 +16,9 @@ const leftside=document.querySelector('.left-buttons')
 const sktchArea=document.querySelector('.sketch-area')
 const footer=document.querySelector('.footer')
 const header=document.querySelector('.header')
+const colorShadow=document.querySelector("#colorWell")
+const ui=document.querySelector(".ui")
+let click="clear"
 let items = document.querySelectorAll('.grid-item');
 let param=document.querySelector('.param')
 let borderBtn=document.querySelector('.border')
@@ -43,7 +47,7 @@ function makeGrid(rows,columns){
     for (let i = 0; i < (rows * columns); i++) {
       let items = document.querySelectorAll('.grid-item');
         let cell = document.createElement("div");
-        
+
         if(borderMode=="borderless"){
           items.forEach(item => {
             item.style.border = "";
@@ -61,16 +65,17 @@ function makeGrid(rows,columns){
     }
 
 //*///////////////CLEAR GRID\\\\\\\\\\\\\\\\\\\*/
-function clearGrid(rows,columns,parameter,color){
-  if(paramState==0){
-  let items = document.querySelectorAll('.grid-item');
-  items.forEach(item => {
-      item.style.backgroundColor = "whitesmoke";
-  })}
-  if(paramState==1){
+function clearGrid(rows,columns,parameter,color,click){
+  if(click=="mode"){
   while(grids.firstChild) {
     grids.removeChild(grids.lastChild)
   }return(makeGrid(rows,columns))}
+  else if(click=="clear"){
+    let items = document.querySelectorAll('.grid-item');
+  items.forEach(item => {
+      item.style.backgroundColor = "whitesmoke";
+  })
+}
 }
 /*//////////////////////\\\\\\\\\\\\\\\\\\\\\*/
 
@@ -126,8 +131,19 @@ btn.forEach(btn => {
 })
 })
 
+colorBtn.addEventListener('click', ()=>{
+  colorShadow.style.boxShadow="0 0 5px " +color
+})
+
+function ogShadow(color){
+  colorShadow.style.boxShadow="0 0 20px "+color
+
+}
+
 clear.addEventListener("click", ()=>{
-  clearGrid(16,16)
+  click="clear"
+  return (clearGrid(rows,columns,parameter,color,click))
+
 }) 
 
 text.addEventListener('mouseover', ()=>{
@@ -147,6 +163,7 @@ themeSwitcher.addEventListener('click', ()=>{
       themeSwitcher.style.color="white"
       mode="dark_mode"
       leftside.style.backgroundColor="rgb(26, 25, 25)"
+      ui.style.backgroundColor="rgb(26, 25, 25)"
       sktchArea.style.backgroundColor="black"
       header.style.backgroundColor="black"
       footer.style.backgroundColor="white"
@@ -157,6 +174,7 @@ themeSwitcher.addEventListener('click', ()=>{
     themeSwitcher.textContent="dark_mode"
     themeSwitcher.style.color="black"
     mode="light_mode"
+    ui.style.backgroundColor="white"
     leftside.style.backgroundColor="white"
     sktchArea.style.backgroundColor="white"
     header.style.backgroundColor="white"
@@ -170,14 +188,16 @@ themeSwitcher.addEventListener('click', ()=>{
 param.addEventListener('click', ()=>{
   if(parameter=='mouseover'){
     parameter='click';
+    click="mode"
     paramState=1
     param.textContent="Hover Fill"
-    return(clearGrid(rows,columns,color,parameter))
+    return(clearGrid(rows,columns,color,parameter,click))
   }
   else if(parameter=='click'){
     parameter='mouseover';
+    click="mode"
     param.textContent="Click Fill"
-    return(clearGrid(rows,columns,color,parameter))
+    return(clearGrid(rows,columns,color,parameter,click))
   }
 })
 
@@ -195,4 +215,23 @@ borderBtn.addEventListener('click',()=>{
   }
 })
 
+//COLOR PICKER\\\\\\\\\\
+var colorWell;
+var defaultColor = "#9acd32";
+
+window.addEventListener("load", startup, false);
+function startup() {
+  colorWell = document.querySelector("#colorWell");
+  colorWell.addEventListener("input", updateFirst, false);
+  function updateFirst(event) {
+      color = event.target.value;
+      colorShadow.style.boxShadow="0 0 20px "+event.target.value
+
+      if(color=="#000000" || color=="#444444" || color=="#232323"){
+        colorShadow.style.boxShadow="0 0 20px yellowgreen"
+      }
+      console.log(color)
+      return(hoverColor(color,parameter))
+    }
+  }
 /*/////////////////////////////////////////////*/
